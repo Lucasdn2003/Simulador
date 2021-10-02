@@ -1,5 +1,8 @@
 $(document).on('ready', function() {
     $('#radio1').prop('checked', true)
+
+    
+
 })
 
 $('#btn').click (function () {
@@ -18,13 +21,22 @@ $('#btn').click (function () {
 
 
 $('#btn2').click( () => {
+    const APIURL = 'https://jsonplaceholder.typicode.com/posts' 
+    const infoPost = {monto: $('#monto').val()}
+    $.ajax({
+        method: "POST",
+        url: APIURL,
+        data: infoPost,
+        success: function(respuesta){
+            console.log(`Mostrando el monto ingresado el cual es ${respuesta.monto}, pero usando el metodo "POST"`);
+        }
+    })
+
     $('div').fadeOut(1000)
     $('#form2').slideUp(2000)
 let monto = $('#monto').val()
 localStorage.setItem('monto', monto);
 console.log('el monto ingresado es ' + monto);
-
-
 
 let seleccion = $("input[name='opciones']:checked").val()
     const calculo = (localStorage.getItem('monto')/ seleccion).toFixed(2) 
